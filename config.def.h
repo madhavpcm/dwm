@@ -2,6 +2,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
+static const char *upbright[] = { "sudo /usr/bin/ybacklight", "-inc" ,"5", NULL};
+static const char *downbright[] = { "sudo /usr/bin/ybacklight", "-dec" ,"5", NULL};
 static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
 static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
@@ -13,6 +15,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int usealtbar          = 1;        /* 1 means use non-dwm status bar */
 static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
+static const char statussep         = ';';      /* separator between status bars */
 static const char *altbarcmd        = "$HOME/bar.sh"; /* Alternate bar launch command */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
@@ -82,6 +85,8 @@ static Key keys[] = {
 	{ 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
 	{ 0,                       XF86XK_AudioMute, spawn,        {.v = mutevol } },
 	{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+        { 0,       XF86XK_MonBrightnessUp,   spawn, {.v = upbright} },
+        { 0,       XF86XK_MonBrightnessDown,   spawn, {.v = downbright} },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -154,4 +159,3 @@ static IPCCommand ipccommands[] = {
   IPCCOMMAND(  setlayoutsafe,       1,      {ARG_TYPE_PTR}    ),
   IPCCOMMAND(  quit,                1,      {ARG_TYPE_NONE}   )
 };
-
