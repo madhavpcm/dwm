@@ -2,8 +2,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char *upbright[] = { "sudo /usr/bin/ybacklight", "-inc" ,"5", NULL};
-static const char *downbright[] = { "sudo /usr/bin/ybacklight", "-dec" ,"5", NULL};
+static const char *upbright[] = { "brightnessctl", "s" ,"+5%",  NULL};
+static const char *downbright[] = { "brightnessctl", "s" ,"5%-", NULL};
 static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
 static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
@@ -81,6 +81,8 @@ static const char *termcmd[]  = { "alacritty", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ MODKEY,                       XK_m, shiftview, {.i = +1  } },
+	{ MODKEY,                       XK_n, shiftview, {.i = -1  } },
 	{ 0, XK_Print, spawn, {.v = prtscrcmd } },
 	{ 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
 	{ 0,                       XF86XK_AudioMute, spawn,        {.v = mutevol } },
